@@ -13,7 +13,48 @@ Today I found this: a project for Financial Investment Risk Management. https://
 2. Install Windows Subsystem for Linux (WSL)
 https://docs.microsoft.com/en-us/windows/wsl/install-win10
 
+3. Install Ubuntu
 
+# PART 1 Docker
+
+0. Learn how to install docker in Ubutu familiar commands
+
+1. Understand the concept and familiar usage of WSL+Ubuntu+Docker for windows
+this video helped me really understand relationships with WSL/Ubuntu/Docker
+https://www.youtube.com/watch?v=5RQbdMn04Oc(PS: that budy got a really awsome room!)
+some basic commands explaination:
+https://www.youtube.com/watch?v=HqBMEmoAd1M&ab_channel=AutomationStepbyStep-RaghavPal
+docker pull 
+docker images
+docker rmi ## Remove all images
+docker stop 
+docker run --name dockername
+docker rm <container_id>##Remove containers
+docker build -t
+docker ps -a
+
+
+# PART 2 Install Postgres on the Docker
+https://medium.com/learn-from-machines/part-2-install-postgresql-on-a-docker-image-84e6cceba9b9
+
+docker pull postgres ##get the image
+docker run --name cont_postgres -e POSTGRES_PASSWORD=*** -d postgres:13.0-alpine  ***haven't figure out how to correctly add --volume $HOME/Desktop/FRM_project/volumes/postgres:/var/lib/postgresql/data img_postgres
+
+sudo docker exec -it cont_postgres bash
+psql -h localhost -d postgres -U postgres ### come into the commandline for the DB
+
+CREATE USER steve WITH ENCRYPTED PASSWORD 'yourpass';
+create database frm_db_dev;
+GRANT ALL PRIVILEGES ON DATABASE frm_db_dev TO steve;
+
+##relog in the db using 'steve'
+\q
+psql -h localhost -d db_name -U steve
+sudo docker start cont_postgres
+sudo docker exec -it cont_postgres psql -d db_name -U steve
+
+This video clearly illustrats 'Install PostgreSQL on a Docker'
+https://www.youtube.com/watch?v=aHbE3pTyG-Q&ab_channel=Amigoscode
 
 You can use the [editor on GitHub](https://github.com/steveding1/steveding1.github.io/edit/main/index.md) to maintain and preview the content for your website in Markdown files.
 
